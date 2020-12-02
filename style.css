@@ -11,6 +11,8 @@ background-size: cover;}
 p.one {
       border-style: dotted;
       border-color: red green blue yellow;
+      padding:20px;
+      border-radius: 10px;
     }
 #ninja {
   color:gold;font-size: 20pt;
