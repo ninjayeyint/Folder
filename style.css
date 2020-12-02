@@ -1,0 +1,22 @@
+
+#demo {
+  color:gold;font-size:15pt;
+  text-shadow: 2px 2px 10px yellow;
+  
+}
+
+body {background: #000000 url(ninja.png) no-repeat center top;
+background-size: cover;}
+
+p.one {
+      border-style: dotted;
+      border-color: red green blue yellow;
+    }
+#ninja {
+  color:gold;font-size: 20pt;
+  text-shadow: 2px 2px 5px yellow;
+}
+#yeyint{
+  color:#0015FF;
+  text-shadow:2px 2px 5px
+}
