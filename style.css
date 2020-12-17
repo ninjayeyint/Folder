@@ -20,5 +20,8 @@ p.one {
 }
 #yeyint{
   color:#0015FF;
-  text-shadow:2px 2px 5px
+  text-shadow:2px 2px 5px;
+}
+audio{
+  height:0px;width: 0px;
 }
