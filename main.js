@@ -1,28 +1,73 @@
-// Set the date we're counting down to
-var countDownDate = new Date("jan 17, 2021 08:30:00").getTime();
+$(function () {
+ $(".menu-link").click(function () {
+  $(".menu-link").removeClass("is-active");
+  $(this).addClass("is-active");
+ });
+});
 
-// Update the count down every 1 sechttp://
-var x = setInterval(function() {
+$(function () {
+ $(".main-header-link").click(function () {
+  $(".main-header-link").removeClass("is-active");
+  $(this).addClass("is-active");
+ });
+});
 
-  // Get todays date and time
-  var now = new Date().getTime();
+const dropdowns = document.querySelectorAll(".dropdown");
+dropdowns.forEach((dropdown) => {
+ dropdown.addEventListener("click", (e) => {
+  e.stopPropagation();
+  dropdowns.forEach((c) => c.classList.remove("is-active"));
+  dropdown.classList.add("is-active");
+ });
+});
 
-  // Find the distance between now an the count down date
-  var distance = countDownDate - now;
+$(".search-bar input")
+ .focus(function () {
+  $(".header").addClass("wide");
+ })
+ .blur(function () {
+  $(".header").removeClass("wide");
+ });
 
-  // Time calculations for days, hours, minutes and seconds
-  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+$(document).click(function (e) {
+ var container = $(".status-button");
+ var dd = $(".dropdown");
+ if (!container.is(e.target) && container.has(e.target).length === 0) {
+  dd.removeClass("is-active");
+ }
+});
 
-  // Display the result in the element with id="demo"
-  document.getElementById("demo").innerHTML = days + " d "+ hours + " h "
-  + minutes + " m " + seconds+" s ";
-
-  // If the count down is finished, write some text 
-  if (distance < 0) {
-    clearInterval(x);
-    document.getElementById("demo").innerHTML = "အချိန်ပြည့်သွားပါပြီ";
+$(function () {
+ $(".dropdown").on("click", function (e) {
+  $(".content-wrapper").addClass("overlay");
+  e.stopPropagation();
+ });
+ $(document).on("click", function (e) {
+  if ($(e.target).is(".dropdown") === false) {
+   $(".content-wrapper").removeClass("overlay");
   }
-}, 1000);
+ });
+});
+
+$(function () {
+ $(".status-button:not(.open)").on("click", function (e) {
+  $(".overlay-app").addClass("is-active");
+ });
+ $(".pop-up .close").click(function () {
+  $(".overlay-app").removeClass("is-active");
+ });
+});
+
+$(".status-button:not(.open)").click(function () {
+ $(".pop-up").addClass("visible");
+});
+
+$(".pop-up .close").click(function () {
+ $(".pop-up").removeClass("visible");
+});
+
+const toggleButton = document.querySelector('.dark-light');
+
+toggleButton.addEventListener('click', () => {
+  document.body.classList.toggle('light-mode');
+});
