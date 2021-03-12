@@ -1,73 +1,92 @@
-$(function () {
- $(".menu-link").click(function () {
-  $(".menu-link").removeClass("is-active");
-  $(this).addClass("is-active");
- });
-});
+var message = [
+  'Hello Special 4 Clan မှကြိုဆိုပါ  တယ်',
+  '‌ေတွ့ရတာ၀မ်းသာပါတယ်🙄🙄',
+  'Speical 4 clan ရဲ့အချောဆုံးကတော့ magicပါသူကရုပ်လဲချောskill လဲကောင်း😁',
+  'speical.4 clan ရဲ့Leaderက‌ေတာ့ S4 RoHanပါ သူကတော့ clan ရဲ့ leaderလဲဟုတ် clan ရဲ့ algel‌ေလးလဲဟုတ်  စော်ရှာပေးလို့ပါ😁',
+  'Clan ရဲ့coleader‌ေတက‌ေတာ့ S4 DragonနဲS4 Magicပါ ',
+  'Girl Playerမှာဆို‌ေလာ‌ေလာဆယ်namechangeထားတာ  S4 Algel/S4 Mia ပါ',
+  'ခု‌ေမးချင်တာ‌ေမး‌ေနတဲ့လူက‌ေစာ်‌ေတဘဲ‌ေတရှီလယး',
+  'အပို‌ေတ‌ေပြာမ‌ေနနဲ မင်းအောင်လှိူင်သာအာဏာရရင်ရမယ်broကရမှာမဟုတ်ဘူး🙄',
+  'စိတ်မဆိုးပါနဲ ချစ်လို့စတာ❤️❤️',
+  'Clan ၀င်ချင်ရင်လဲပြောနော် အားမနာနဲ ',
+  'magicကို ချစ်နေရင်လဲဖွင့်ပြောလိုက်',
+  'နိူင်ငံ‌ေရးမ‌ေကာင်းတာ‌ေတာင်ဒီမှာစာလာ‌ေရး‌ေနနိူင်တယ် လိပ်ပြာလုံပါစေ🙄🙄🙄',
+  'ဆဲချင်ရင်လဲclan leaderကိုသွားဆဲ🙂🙂🙂',
+  'တာ့တာ့ အချိန်ကုန်တယ် စော်မရှီ ဘဲမရှီတေနဲပြောကတာ🙄🙄🙄',
+  ':)'
+]
 
-$(function () {
- $(".main-header-link").click(function () {
-  $(".main-header-link").removeClass("is-active");
-  $(this).addClass("is-active");
- });
-});
-
-const dropdowns = document.querySelectorAll(".dropdown");
-dropdowns.forEach((dropdown) => {
- dropdown.addEventListener("click", (e) => {
-  e.stopPropagation();
-  dropdowns.forEach((c) => c.classList.remove("is-active"));
-  dropdown.classList.add("is-active");
- });
-});
-
-$(".search-bar input")
- .focus(function () {
-  $(".header").addClass("wide");
+$(document).ready(function() { 
+    setTimeout(function(){
+        loader();
+        setTimeout(function(){
+        $('.container .display .lds-ellipsis').fadeOut(0);
+        reply();
+       }, 1600) 
+    },1000);
  })
- .blur(function () {
-  $(".header").removeClass("wide");
- });
 
-$(document).click(function (e) {
- var container = $(".status-button");
- var dd = $(".dropdown");
- if (!container.is(e.target) && container.has(e.target).length === 0) {
-  dd.removeClass("is-active");
- }
+var scrollctr = 200;
+var i =0;
+
+function scrollUpdate(){
+    lastElementTop = $('.display').position().top ;
+    scrollAmount = lastElementTop + scrollctr ;
+    scrollctr += 200; 
+$('.display').animate({scrollTop: scrollAmount},700);
+}
+
+function msngr(){
+  var msg = $('.text input').val();
+  $('.container .display').append("<div class='msg'><p>"+msg+"</p></div>");
+  $('.text input').val("");
+}
+function reply(){
+    
+    
+    if(i>=15){i =15; }
+    $('.container .display').append("<div class='reply'><p>"+message[i]+"</p></div>");
+    i++;
+}
+function loader(){
+    $('.container .display').append("<div class='lds-ellipsis'><div></div><div></div><div></div><div></div></div>");
+}
+
+
+$('.tray .fa-paper-plane').click(msngr);
+$(document).on('keypress',function(e) {
+    if(e.which == 13) {
+        e.preventDefault();
+        msngr();
+        scrollUpdate();
+    }
 });
 
-$(function () {
- $(".dropdown").on("click", function (e) {
-  $(".content-wrapper").addClass("overlay");
-  e.stopPropagation();
- });
- $(document).on("click", function (e) {
-  if ($(e.target).is(".dropdown") === false) {
-   $(".content-wrapper").removeClass("overlay");
-  }
- });
+
+
+$('.tray .fa-paper-plane').click(function(){
+    setTimeout(function(){
+        scrollUpdate();
+        loader();
+        setTimeout(function(){
+        $('.container .display .lds-ellipsis').fadeOut(0);
+        reply();
+        scrollUpdate();
+       }, 1600) 
+    },1000);
+});
+$(document).on('keypress',function(e) {
+    if(e.which == 13) {
+        e.preventDefault();
+        setTimeout(function(){
+        scrollUpdate();
+        loader();
+        setTimeout(function(){
+        $('.container .display .lds-ellipsis').fadeOut(0);
+        reply();
+        scrollUpdate();
+       }, 1600) 
+    },1000);
+}
 });
 
-$(function () {
- $(".status-button:not(.open)").on("click", function (e) {
-  $(".overlay-app").addClass("is-active");
- });
- $(".pop-up .close").click(function () {
-  $(".overlay-app").removeClass("is-active");
- });
-});
-
-$(".status-button:not(.open)").click(function () {
- $(".pop-up").addClass("visible");
-});
-
-$(".pop-up .close").click(function () {
- $(".pop-up").removeClass("visible");
-});
-
-const toggleButton = document.querySelector('.dark-light');
-
-toggleButton.addEventListener('click', () => {
-  document.body.classList.toggle('light-mode');
-});
